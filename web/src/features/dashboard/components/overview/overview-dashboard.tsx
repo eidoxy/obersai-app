@@ -65,7 +65,6 @@ import {
 } from '../../hooks/use-status-data'
 import { AnnouncementsPanel } from './announcements-panel'
 import { ApiInfoPanel } from './api-info-panel'
-import { FAQPanel } from './faq-panel'
 import { PerformanceHealthPanel } from './performance-health-panel'
 import { SummaryCards } from './summary-cards'
 import { UptimePanel } from './uptime-panel'
@@ -469,7 +468,6 @@ export function OverviewDashboard() {
   const {
     apiInfo: showApiInfoPanel,
     announcements: showAnnouncementsPanel,
-    faq: showFAQPanel,
     uptimeKuma: showUptimePanel,
   } = useDashboardContentVisibility()
   const [manualSetupGuideExpanded, setManualSetupGuideExpanded] = useState<
@@ -615,7 +613,7 @@ export function OverviewDashboard() {
   const setupGuideExpanded =
     manualSetupGuideExpanded ?? (setupStatusReady && !setupComplete)
   const showLeftContentPanels =
-    isAdmin || showApiInfoPanel || showAnnouncementsPanel || showFAQPanel
+    isAdmin || showApiInfoPanel || showAnnouncementsPanel
   const showContentPanels = showLeftContentPanels || showUptimePanel
 
   const handleSetupGuideToggle = () => {
@@ -803,8 +801,7 @@ export function OverviewDashboard() {
                   className={cn(
                     'grid min-w-0 grid-cols-1 gap-4',
                     (showApiInfoPanel ||
-                      showAnnouncementsPanel ||
-                      showFAQPanel) &&
+                      showAnnouncementsPanel) &&
                       'lg:grid-cols-2'
                   )}
                 >
@@ -821,11 +818,6 @@ export function OverviewDashboard() {
                   {showAnnouncementsPanel && (
                     <CardStaggerItem>
                       <AnnouncementsPanel />
-                    </CardStaggerItem>
-                  )}
-                  {showFAQPanel && (
-                    <CardStaggerItem>
-                      <FAQPanel />
                     </CardStaggerItem>
                   )}
                 </div>
